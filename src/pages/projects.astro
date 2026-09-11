@@ -1,0 +1,45 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import ProjectCard from "../components/ProjectCard.tsx";
+
+const projects = [
+  { id: "olympus", title: "OLYMPUS", subtitle: "Performance System for Athletes — flagship training & analytics", accent: "gold" as const, status: "FLAGSHIP", desc: "Our flagship. Performance system for athletes, coaches and engineers who measure everything." },
+  { id: "dragonquant", title: "DRAGONQUANT", subtitle: "Quant / Trading Platform", accent: "emerald" as const, status: "ACTIVE", desc: "Quant research, backtesting and execution. Heavy math, high performance." },
+  { id: "draconomicon", title: "DRACONOMICON", subtitle: "Knowledge / Second Brain", accent: "violet" as const, status: "ACTIVE", desc: "The Draconis knowledge engine. Notes, papers, models — connected." },
+  { id: "durapy", title: "DURAPY", subtitle: "Durable Python / Runtime", accent: "cyan" as const, status: "ACTIVE", desc: "Durable, typed, fast Python runtime and tooling." },
+  { id: "icarus", title: "ICARUS", subtitle: "AI Agent & Productivity", accent: "red" as const, status: "ACTIVE", desc: "Autonomous agent for productivity, coding and operations." },
+  { id: "draconiforge", title: "DRACONIFORGE", subtitle: "Build & Tooling Platform", accent: "blue" as const, status: "INCUBATOR", desc: "Forge for builds, templates and developer tooling. Early stage." },
+  { id: "dracolix", title: "DRACOLIX", subtitle: "HPC / Math Platform", accent: "blue" as const, status: "ACTIVE", desc: "HPC and numerical computing platform. Part of the core stack." },
+];
+---
+<BaseLayout title="Projects — Draconis Engineering">
+  <Header />
+  <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
+    <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-[#c9a86a]"></span>
+        <span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">PROJECTS</span>
+      </div>
+      <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">THE ECOSYSTEM</h1>
+      <p class="mt-3 max-w-[640px] text-[11.5px] leading-[1.8] font-mono text-white/45">All Draconis projects are built in the open. Olympus is the flagship — the rest is the forge, the lab and the engine room. Links to the GitHub org coming soon.</p>
+      
+      <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {projects.map(p => (
+          <div id={p.id} class="scroll-mt-24">
+            <ProjectCard client:visible title={p.title} subtitle={p.subtitle} accent={p.accent} status={p.status} href={`#${p.id}`} />
+            <p class="mt-3 text-[11px] leading-[1.7] font-mono text-white/30 px-1">{p.desc}</p>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-12 p-6 border border-white/10 bg-white/[0.02] backdrop-blur">
+        <div class="text-[10px] tracking-[0.2em] font-mono text-white/30">GITHUB ORGANIZATION</div>
+        <p class="mt-2 text-[12px] font-mono text-white/60">Organization link will be published here once public. For now, explore Olympus as the entry point.</p>
+        <a href="/" class="inline-flex mt-4 text-[11px] tracking-[0.16em] font-mono text-[#c9a86a] hover:text-[#e8d5a8]">← BACK TO HOME</a>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

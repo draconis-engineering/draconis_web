@@ -1,0 +1,27 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout title="About — Draconis Engineering">
+  <Header />
+  <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
+    <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
+      <div class="flex items-center gap-3"><span class="w-8 h-[1px] bg-[#c9a86a]"></span><span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">ABOUT</span></div>
+      <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">DRACONIS ENGINEERING</h1>
+      <p class="mt-1 text-[10px] tracking-[0.3em] font-mono text-white/30">SOFTWARE × ENGINEERING × PERFORMANCE</p>
+      <div class="mt-8 max-w-[720px] space-y-4 text-[13px] leading-[1.9] text-white/60">
+        <p>We are a small, focused engineering group building open-source software for a higher standard. Athletes, engineers and thinkers who want to push the limits — in every direction.</p>
+        <p><strong class="text-white/80 font-medium">Philosophy:</strong> performance, openness, correctness. No black boxes. Built in the open, measured, documented.</p>
+        <p class="font-mono text-[11px] text-white/35 border-l border-[#c9a86a]/30 pl-4">Coordinates 60.3913° N 5.3221° E — Bergen, Norway.</p>
+      </div>
+      <div class="mt-8 grid md:grid-cols-3 gap-4 max-w-[720px]">
+        <div class="p-4 border border-white/10 bg-white/[0.02]"><div class="text-[10px] tracking-[0.2em] font-mono text-white/40">INNOVATION</div><p class="mt-2 text-[12px] text-white/50 leading-relaxed">Research-driven, not demo-driven.</p></div>
+        <div class="p-4 border border-white/10 bg-white/[0.02]"><div class="text-[10px] tracking-[0.2em] font-mono text-white/40">PERFORMANCE</div><p class="mt-2 text-[12px] text-white/50 leading-relaxed">Fast, lean, benchmarked.</p></div>
+        <div class="p-4 border border-white/10 bg-white/[0.02]"><div class="text-[10px] tracking-[0.2em] font-mono text-white/40">OPEN SOURCE</div><p class="mt-2 text-[12px] text-white/50 leading-relaxed">GitHub is source of truth.</p></div>
+      </div>
+      <a href="/projects" class="inline-flex mt-8 text-[11px] tracking-[0.16em] font-mono text-[#c9a86a] hover:text-[#e8d5a8]">EXPLORE PROJECTS →</a>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

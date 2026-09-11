@@ -1,0 +1,42 @@
+@import "tailwindcss";
+
+@theme {
+  --color-draconis-bg: #070a0c;
+  --color-draconis-bg-soft: #0c1015;
+  --color-draconis-gold: #c9a86a;
+  --color-draconis-gold-light: #e8d5a8;
+  --color-draconis-gold-dim: #8a7350;
+  --color-draconis-line: rgba(255,255,255,0.08);
+  --color-draconis-line-strong: rgba(255,255,255,0.14);
+  --color-draconis-muted: #8a8f98;
+  --color-draconis-faint: #5a6069;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --font-display: "Geist", "Space Grotesk", system-ui, sans-serif;
+}
+
+* { scrollbar-color: #2a2f37 #070a0c; }
+
+html {
+  background: #070a0c;
+  color: #e6e8eb;
+  scroll-behavior: smooth;
+}
+
+body {
+  background: #070a0c;
+  font-family: var(--font-display);
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* subtle grain */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  opacity: 0.035;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.4'/%3E%3C/svg%3E");
+}
+
+::selection { background: rgba(201,168,106,0.3); }

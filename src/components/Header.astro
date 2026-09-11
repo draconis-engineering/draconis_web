@@ -1,0 +1,75 @@
+---
+const nav = [
+  { label: "HOME", href: "/", active: true },
+  { label: "PROJECTS", href: "/projects" },
+  { label: "ABOUT", href: "/about" },
+  { label: "DOCS", href: "/docs" },
+  { label: "BLOG", href: "/blog" },
+];
+const currentPath = Astro.url.pathname;
+---
+<header class="absolute top-0 inset-x-0 z-30">
+  <div class="max-w-[1480px] mx-auto px-6 lg:px-8">
+    <div class="flex items-center justify-between h-[72px] border-b border-white/[0.06]">
+      <!-- logo -->
+      <a href="/" class="flex items-center gap-3 group">
+        <div class="w-9 h-9 relative flex items-center justify-center">
+          <!-- geometric D logo -->
+          <svg viewBox="0 0 32 32" class="w-9 h-9" fill="none" aria-hidden="true">
+            <path d="M6 6 L14 6 L20 12 L14 16 L20 20 L14 26 L6 26 Z" stroke="white" stroke-width="1.7" fill="none" />
+            <path d="M14 6 L20 2 L28 10 L22 16 L28 22 L20 30 L14 26" stroke="white" stroke-width="1.7" fill="none" opacity="0.95" />
+            <path d="M10 10 L14 14 L10 18" stroke="white" stroke-width="1.2" opacity="0.6" />
+          </svg>
+        </div>
+        <div class="leading-none">
+          <div class="text-[16px] tracking-[0.18em] font-light text-white">DRACONIS</div>
+          <div class="text-[9px] tracking-[0.38em] text-white/60 font-mono mt-[2px]">ENGINEERING</div>
+        </div>
+      </a>
+
+      <!-- center nav desktop -->
+      <nav class="hidden lg:flex items-center gap-8">
+        {nav.map(item => {
+          const isActive = currentPath === item.href || (item.href === "/" && currentPath === "/");
+          return (
+            <a 
+              href={item.href}
+              class={`relative text-[10px] tracking-[0.2em] font-mono py-2 transition ${isActive ? "text-white" : "text-white/55 hover:text-white/90"}`}
+            >
+              {item.label}
+              {isActive && <span class="absolute -bottom-[1px] left-0 right-0 h-[1.5px] bg-[#c9a86a]"></span>}
+            </a>
+          )
+        })}
+      </nav>
+
+      <!-- right tagline desktop -->
+      <div class="hidden xl:block text-right leading-none">
+        <div class="text-[8.5px] tracking-[0.16em] text-white/45 font-mono">
+          SOFTWARE <span class="text-white/20 mx-1">×</span> ENGINEERING <span class="text-white/20 mx-1">×</span> PERFORMANCE
+        </div>
+        <div class="text-[8.5px] tracking-[0.22em] text-white/30 font-mono mt-1">OPEN SOURCE</div>
+      </div>
+
+      <!-- mobile hamburger -->
+      <button id="menu-btn" class="lg:hidden p-2 text-white/70 hover:text-white" aria-label="Menu">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+
+    <!-- mobile nav -->
+    <div id="mobile-nav" class="hidden lg:hidden border-b border-white/10 bg-[#070a0c]/95 backdrop-blur">
+      <nav class="flex flex-col py-4">
+        {nav.map(item => (
+          <a href={item.href} class="px-2 py-3 text-[11px] tracking-[0.2em] font-mono text-white/70 hover:text-white border-b border-white/[0.04] last:border-0">{item.label}</a>
+        ))}
+      </nav>
+    </div>
+  </div>
+</header>
+
+<script>
+  const btn = document.getElementById('menu-btn');
+  const navEl = document.getElementById('mobile-nav');
+  btn?.addEventListener('click', () => navEl?.classList.toggle('hidden'));
+</script>
