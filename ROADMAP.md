@@ -1,6 +1,6 @@
 # Draconis Engineering — Roadmap
 
-Concept: `concept.png` — dark cinematic Chinese dragon, gold linework, HUD, mountains.
+Concept: `concept.png` — dark cinematic Chinese dragon, gold linework, HUD, mountains, high tech.
 
 ## v1.0 — MVP (current)
 
