@@ -3,16 +3,25 @@ import BaseLayout from "../layouts/BaseLayout.astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ProjectCard from "../components/ProjectCard.tsx";
+import { fetchOrgRepos } from "../lib/github";
 
 const projects = [
-  { id: "olympus", title: "OLYMPUS", subtitle: "Performance System for Athletes — flagship training & analytics", accent: "gold" as const, status: "FLAGSHIP", desc: "Our flagship. Performance system for athletes, coaches and engineers who measure everything.", href: "https://github.com/draconis-engineering" },
-  { id: "dragonquant", title: "DRAGONQUANT", subtitle: "Quant / Trading Platform", accent: "emerald" as const, status: "ACTIVE", desc: "Quant research, backtesting and execution. Heavy math, high performance.", href: "https://github.com/draconis-engineering" },
-  { id: "draconomicon", title: "DRACONOMICON", subtitle: "Knowledge / Second Brain", accent: "violet" as const, status: "ACTIVE", desc: "The Draconis knowledge engine. Notes, papers, models — connected.", href: "https://github.com/draconis-engineering" },
-  { id: "durapy", title: "DURAPY", subtitle: "Durable Python / Runtime", accent: "cyan" as const, status: "ACTIVE", desc: "Durable, typed, fast Python runtime and tooling.", href: "https://github.com/draconis-engineering" },
-  { id: "icarus", title: "ICARUS", subtitle: "AI Agent & Productivity", accent: "red" as const, status: "ACTIVE", desc: "Autonomous agent for productivity, coding and operations.", href: "https://github.com/draconis-engineering" },
-  { id: "draconiforge", title: "DRACONIFORGE", subtitle: "Build & Tooling Platform", accent: "blue" as const, status: "INCUBATOR", desc: "Forge for builds, templates and developer tooling. Early stage.", href: "https://github.com/draconis-engineering" },
-  { id: "dracolix", title: "DRACOLIX", subtitle: "HPC / Math Platform", accent: "blue" as const, status: "ACTIVE", desc: "HPC and numerical computing platform. Part of the core stack.", href: "https://github.com/draconis-engineering" },
+  { id: "olympus", title: "OLYMPUS", subtitle: "Performance System for Athletes — flagship training & analytics", accent: "gold" as const, status: "FLAGSHIP", desc: "Our flagship. Performance system for athletes, coaches and engineers who measure everything.", repo: "olympus" },
+  { id: "dragonquant", title: "DRAGONQUANT", subtitle: "Quant / Trading Platform", accent: "emerald" as const, status: "ACTIVE", desc: "Quant research, backtesting and execution. Heavy math, high performance.", repo: "dragonquant" },
+  { id: "draconomicon", title: "DRACONOMICON", subtitle: "Knowledge / Second Brain", accent: "violet" as const, status: "ACTIVE", desc: "The Draconis knowledge engine. Notes, papers, models — connected.", repo: "draconomicon" },
+  { id: "durapy", title: "DURAPY", subtitle: "Durable Python / Runtime", accent: "cyan" as const, status: "ACTIVE", desc: "Durable, typed, fast Python runtime and tooling.", repo: "durapy" },
+  { id: "icarus", title: "ICARUS", subtitle: "AI Agent & Productivity", accent: "red" as const, status: "ACTIVE", desc: "Autonomous agent for productivity, coding and operations.", repo: "icarus" },
+  { id: "draconiforge", title: "DRACONIFORGE", subtitle: "Build & Tooling Platform", accent: "blue" as const, status: "INCUBATOR", desc: "Forge for builds, templates and developer tooling. Early stage.", repo: "draconiforge" },
+  { id: "dracolix", title: "DRACOLIX", subtitle: "HPC / Math Platform", accent: "blue" as const, status: "ACTIVE", desc: "HPC and numerical computing platform. Part of the core stack.", repo: "dracolix" },
 ];
+
+const ghMap = await fetchOrgRepos();
+const orgTotalStars = Object.values(ghMap).reduce((a,r) => a + (r.stargazers_count ?? 0), 0);
+const orgRepoCount = new Set(Object.values(ghMap).map(r => r.name.toLowerCase())).size || 11;
+
+function ghFor(p: typeof projects[number]) {
+  return ghMap[p.id.toLowerCase()] ?? ghMap[p.repo.toLowerCase()] ?? null;
+}
 ---
 <BaseLayout title="Projects — Draconis Engineering">
   <Header />
@@ -25,18 +34,44 @@ const projects = [
       <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">THE ECOSYSTEM</h1>
       <p class="mt-3 max-w-[640px] text-[11.5px] leading-[1.8] font-mono text-white/45">All Draconis projects are built in the open. Olympus is the flagship — the rest is the forge, the lab and the engine room. Explore at <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:text-[#e8d5a8] underline-offset-4 hover:underline">github.com/draconis-engineering</a>.</p>
       
+      <!-- org strip — live -->
+      <div class="mt-6 flex flex-wrap gap-2 text-[10px] font-mono tracking-[0.08em] text-white/35">
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/[0.03]">★ {orgTotalStars} STARS</span>
+        <span class="inline-flex items-center gap-2 px-3 py-1.5 border border-white/10 bg-white/[0.03]">{orgRepoCount} REPOS</span>
+        <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-3 py-1.5 border border-[#c9a86a]/20 text-[#c9a86a]/80 hover:text-[#c9a86a] hover:border-[#c9a86a]/40 transition">OPEN ORGANIZATION →</a>
+      </div>
+
       <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-4">
-        {projects.map(p => (
-          <div id={p.id} class="scroll-mt-24">
-            <ProjectCard client:visible title={p.title} subtitle={p.subtitle} accent={p.accent} status={p.status} href={p.href} />
-            <p class="mt-3 text-[11px] leading-[1.7] font-mono text-white/30 px-1">{p.desc}</p>
-          </div>
-        ))}
+        {projects.map(p => {
+          const gh = ghFor(p);
+          const href = gh?.html_url ?? `https://github.com/draconis-engineering/${p.repo}`;
+          const isMissing = !gh;
+          return (
+            <div id={p.id} class="scroll-mt-24">
+              <ProjectCard client:visible title={p.title} subtitle={p.subtitle} accent={p.accent} status={p.status} href={href} />
+              <div class="mt-2 flex flex-wrap items-center gap-2 px-1 text-[10px] font-mono">
+                {gh ? (
+                  <>
+                    <span class="inline-flex items-center gap-1 text-white/35"><span class="text-white/50">★</span> {gh.stargazers_count} · {gh.language ?? "—"} · updated {new Date(gh.pushed_at).toLocaleDateString("en-GB", { month:"short", day:"2-digit", year:"numeric" })}</span>
+                    <a href={href} target="_blank" rel="noopener" class="text-[#c9a86a]/70 hover:text-[#c9a86a] transition">{gh.name} →</a>
+                  </>
+                ) : (
+                  <>
+                    <span class="text-white/25">{p.desc}</span>
+                    <span class="ml-auto text-[9px] tracking-[0.14em] text-white/20 border border-white/10 px-1.5 py-0.5">SOON / PRIVATE</span>
+                  </>
+                )}
+              </div>
+              {gh?.description && <p class="mt-1 text-[11px] leading-[1.7] font-mono text-white/30 px-1 line-clamp-2">{gh.description}</p>}
+              {!gh && <p class="mt-1 text-[11px] leading-[1.7] font-mono text-white/25 px-1">{p.desc}</p>}
+            </div>
+          );
+        })}
       </div>
 
       <div class="mt-12 p-6 border border-white/10 bg-white/[0.02] backdrop-blur">
         <div class="text-[10px] tracking-[0.2em] font-mono text-white/30">GITHUB ORGANIZATION</div>
-        <p class="mt-2 text-[12px] font-mono text-white/60">All code lives at <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:text-[#e8d5a8] underline-offset-4 hover:underline">github.com/draconis-engineering</a> — Olympus is the entry point.</p>
+        <p class="mt-2 text-[12px] font-mono text-white/60">All code lives at <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:text-[#e8d5a8] underline-offset-4 hover:underline">github.com/draconis-engineering</a> — live stats pulled at build time via GitHub API (Actions uses <code class="text-white/40">GITHUB_TOKEN</code>). Re-run deploy to refresh.</p>
         <div class="flex gap-4 mt-4">
           <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="inline-flex items-center gap-2 px-4 py-2 bg-white text-black text-[11px] tracking-[0.14em] font-mono font-medium hover:bg-zinc-200 transition">OPEN ORGANIZATION →</a>
           <a href="/" class="inline-flex items-center px-4 py-2 border border-white/15 text-white/70 text-[11px] tracking-[0.14em] font-mono hover:border-white/30 hover:text-white transition">← BACK TO HOME</a>
