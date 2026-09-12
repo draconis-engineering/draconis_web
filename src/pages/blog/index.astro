@@ -1,24 +1,37 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+
+const posts = (await getCollection("blog", ({ data }) => !data.draft))
+  .sort((a,b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 ---
-<BaseLayout title="Blog — Draconis Engineering">
+<BaseLayout title="Blog — Draconis Engineering" description="Engineering notes, release logs and essays.">
   <Header />
   <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
     <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
       <div class="flex items-center gap-3"><span class="w-8 h-[1px] bg-[#c9a86a]"></span><span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">BLOG</span></div>
       <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">LOG / JOURNAL</h1>
-      <p class="mt-3 max-w-[560px] text-[11.5px] leading-[1.8] font-mono text-white/45">Engineering notes, release logs and essays. Placeholder for MVP — content lives as MDX in <code class="text-white/60">src/content/blog/</code>.</p>
-      <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
-        {[1,2,3].map(i => (
-          <article class="p-5 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15 transition">
-            <div class="text-[9px] tracking-[0.18em] font-mono text-white/30">2026-0{i}-01 · ENGINEERING</div>
-            <h3 class="mt-2 text-[13px] tracking-[0.06em] font-medium text-white/80">Coming Soon — Post #{i}</h3>
-            <p class="mt-2 text-[11px] leading-relaxed font-mono text-white/35">This is a stub. Replace with MDX when ready.</p>
-          </article>
-        ))}
-      </div>
+      <p class="mt-3 max-w-[560px] text-[11.5px] leading-[1.8] font-mono text-white/45">Engineering notes and release logs. MDX in <code class="text-white/60">src/content/blog/</code> — each file is a post at <code class="text-white/60">/blog/&lt;slug&gt;</code>.</p>
+      
+      {posts.length === 0 ? (
+        <div class="mt-10 p-6 border border-white/10 bg-white/[0.02] text-[12px] font-mono text-white/40">No posts yet.</div>
+      ) : (
+        <div class="mt-10 grid md:grid-cols-2 lg:grid-cols-3 gap-4">
+          {posts.map((p) => {
+            const date = p.data.pubDate.toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "2-digit" });
+            return (
+              <a href={`/blog/${p.id}`} class="group p-5 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15 transition flex flex-col">
+                <div class="text-[9px] tracking-[0.16em] font-mono text-white/30">{date} · {p.data.tags[0]?.toUpperCase() ?? "ENGINEERING"}</div>
+                <h3 class="mt-2 text-[13px] tracking-[0.04em] font-medium text-white/85 group-hover:text-white">{p.data.title}</h3>
+                <p class="mt-2 text-[11px] leading-relaxed font-mono text-white/40 line-clamp-3">{p.data.description}</p>
+                <span class="mt-auto pt-4 text-[10px] tracking-[0.14em] font-mono text-[#c9a86a]/70 group-hover:text-[#c9a86a]">READ →</span>
+              </a>
+            );
+          })}
+        </div>
+      )}
     </div>
   </main>
   <Footer />

@@ -1,34 +1,46 @@
 ---
+import { getCollection } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
 import Header from "../../components/Header.astro";
 import Footer from "../../components/Footer.astro";
+
+const docs = (await getCollection("docs")).sort((a,b) => (a.data.order ?? 99) - (b.data.order ?? 99));
 ---
-<BaseLayout title="Docs — Draconis Engineering">
+<BaseLayout title="Docs — Draconis Engineering" description="Documentation — Markdown/MDX, GitHub as source of truth.">
   <Header />
   <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
     <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
       <div class="flex items-center gap-3"><span class="w-8 h-[1px] bg-[#c9a86a]"></span><span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">DOCS</span></div>
       <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">DOCUMENTATION</h1>
-      <p class="mt-3 max-w-[560px] text-[11.5px] leading-[1.8] font-mono text-white/45">Docs are Markdown/MDX — GitHub repo is source of truth. This is a stub for MVP; full docs land in v1.1.</p>
-      <div class="mt-8 grid lg:grid-cols-[220px_1fr] gap-6">
-        <nav class="space-y-1 text-[11px] font-mono">
-          <div class="text-white/25 tracking-[0.18em] text-[9px] mb-3">SECTIONS</div>
-          <a class="block py-2 px-3 bg-white/5 text-white border-l border-[#c9a86a]">Getting Started</a>
-          <a class="block py-2 px-3 text-white/40 hover:text-white/70 hover:bg-white/[0.02]">Olympus</a>
-          <a class="block py-2 px-3 text-white/40 hover:text-white/70 hover:bg-white/[0.02]">Dracolix</a>
-          <a class="block py-2 px-3 text-white/40 hover:text-white/70 hover:bg-white/[0.02]">Icarus</a>
-        </nav>
-        <div class="prose prose-invert max-w-none p-6 border border-white/10 bg-white/[0.02]">
-          <h2 class="text-[13px] tracking-[0.16em] font-mono text-white/80">GETTING STARTED (PLACEHOLDER)</h2>
-          <p class="text-[13px] leading-relaxed text-white/55 mt-3">This page will render MDX from <code class="text-[#c9a86a]">src/content/docs/</code>. Add a file like <code>getting-started.mdx</code> and it appears here. GitHub Actions will keep it in sync.</p>
-          <pre class="mt-4 bg-black/40 p-4 text-[11px] font-mono text-white/60 overflow-auto">src/content/docs/getting-started.mdx
----
-title: Getting Started
----
-# Getting Started
-Install, configure, run.</pre>
+      <p class="mt-3 max-w-[560px] text-[11.5px] leading-[1.8] font-mono text-white/45">Docs live as MDX in <code class="text-white/60">src/content/docs/</code>. Add a file, push — Astro generates <code class="text-white/60">/docs/&lt;slug&gt;</code>. GitHub is source of truth.</p>
+      
+      {docs.length === 0 ? (
+        <div class="mt-8 p-6 border border-white/10 bg-white/[0.02] text-[12px] font-mono text-white/40">No docs yet. Add <code>src/content/docs/getting-started.mdx</code>.</div>
+      ) : (
+        <div class="mt-8 grid lg:grid-cols-[240px_1fr] gap-8">
+          <nav class="space-y-1">
+            <div class="text-white/25 tracking-[0.18em] text-[9px] font-mono mb-3">SECTIONS</div>
+            {docs.map((d) => (
+              <a href={`/docs/${d.id}`} class="flex flex-col gap-1 py-2.5 px-3 border-l border-white/10 hover:border-[#c9a86a]/60 hover:bg-white/[0.03] transition group">
+                <span class="text-[11px] tracking-[0.04em] font-medium text-white/80 group-hover:text-white">{d.data.title}</span>
+                {d.data.description && <span class="text-[10px] leading-snug font-mono text-white/35 line-clamp-2">{d.data.description}</span>}
+              </a>
+            ))}
+          </nav>
+          <div class="space-y-3">
+            {docs.map((d) => (
+              <a href={`/docs/${d.id}`} class="block p-5 border border-white/10 bg-white/[0.02] hover:bg-white/[0.04] hover:border-white/15 transition">
+                <div class="flex items-center gap-2 text-[9px] tracking-[0.16em] font-mono text-white/25">
+                  <span class="px-1.5 py-0.5 border border-white/10">{d.data.tag ?? "DOCS"}</span>
+                  <span>→ {d.id}</span>
+                </div>
+                <div class="mt-2 text-[13px] font-medium text-white/85">{d.data.title}</div>
+                {d.data.description && <div class="mt-1 text-[11px] leading-relaxed font-mono text-white/40">{d.data.description}</div>}
+              </a>
+            ))}
+          </div>
         </div>
-      </div>
+      )}
     </div>
   </main>
   <Footer />

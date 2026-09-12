@@ -1,0 +1,35 @@
+---
+title: "Architecture"
+description: "How the ecosystem fits together — Olympus, Dracolix, Icarus, and the forge."
+order: 2
+tag: "CORE"
+---
+
+# Architecture
+
+The Draconis stack is **static-first, open-source, high-performance**.
+
+```
+dragon-hero.png (optimized via astro:assets)
+  ↓
+Hero.astro + ProjectCard islands (React)
+  ↓
+Content collections (docs/blog via glob loader)
+  ↓
+GitHub Pages (static) — draconis-engineering.com
+```
+
+## Projects
+
+- **OLYMPUS** — `gold` accent, flagship performance system for athletes.
+- **DRACOLIX** — `blue` HPC / math platform.
+- **ICARUS** — `red` AI agent & productivity.
+- **DragonQuant / Draconomicon / DuraPy / DraconiForge** — active/incubator.
+
+All live at [github.com/draconis-engineering](https://github.com/draconis-engineering).
+
+## Adding a page
+
+Create `src/content/docs/<section>/my-page.mdx` with frontmatter, push — Astro generates `/docs/<section>/my-page`.
+
+No extra routing needed.

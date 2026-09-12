@@ -1,0 +1,44 @@
+---
+title: "Getting Started"
+description: "Install, configure, and run the Draconis ecosystem."
+order: 1
+tag: "BASICS"
+---
+
+# Getting Started
+
+Welcome to **Draconis Engineering**. All docs are Markdown/MDX — edit in `src/content/docs/` and push, GitHub Actions rebuilds the site.
+
+## Install
+
+```bash
+# example — replace with your real package
+git clone https://github.com/draconis-engineering/olympus
+cd olympus
+npm install
+```
+
+## Structure
+
+- `src/content/docs/` — this folder. Each `.mdx` is a page.
+- `src/content/blog/` — engineering journal posts.
+- `astro.config.mjs:site` → `https://draconis-engineering.com`
+
+Add a file like `src/content/docs/olympus/api.mdx` and it appears at `/docs/olympus/api` automatically.
+
+## Writing docs
+
+Frontmatter controls the sidebar:
+
+```yaml
+---
+title: "My New Page"
+description: "Short blurb for listings"
+order: 2
+tag: "OLYMPUS"
+---
+```
+
+Use normal Markdown, plus components. Prose is styled in the layout.
+
+> Next: see [Architecture](/docs/architecture)

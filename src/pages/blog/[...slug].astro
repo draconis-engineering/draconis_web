@@ -1,0 +1,40 @@
+---
+import { getCollection, render } from "astro:content";
+import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
+import Footer from "../../components/Footer.astro";
+
+export async function getStaticPaths() {
+  const posts = await getCollection("blog", ({ data }) => !data.draft);
+  return posts.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const date = entry.data.pubDate.toLocaleDateString("en-GB", { year: "numeric", month: "short", day: "2-digit" });
+---
+<BaseLayout title={`${entry.data.title} — Draconis Blog`} description={entry.data.description}>
+  <Header />
+  <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
+    <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
+      <a href="/blog" class="text-[10px] tracking-[0.16em] font-mono text-white/30 hover:text-white">← All posts</a>
+      <div class="mt-6 max-w-[760px]">
+        <div class="flex items-center gap-2 text-[10px] tracking-[0.16em] font-mono text-white/30">
+          <span>{date}</span><span class="w-6 h-[1px] bg-white/10"></span><span>{entry.data.author}</span>
+          {entry.data.tags.length > 0 && <><span class="text-white/15">·</span><span class="text-[#c9a86a]/70">{entry.data.tags.join(" · ")}</span></>}
+        </div>
+        <h1 class="mt-3 text-[28px] lg:text-[36px] font-light tracking-[0.06em] text-white leading-tight">{entry.data.title}</h1>
+        <p class="mt-3 text-[12.5px] leading-[1.7] font-mono text-white/45">{entry.data.description}</p>
+        <div class="mt-8 prose prose-invert prose-sm max-w-none prose-headings:font-light prose-a:text-[#c9a86a] prose-a:no-underline hover:prose-a:underline prose-code:text-[#e8d5a8] prose-code:bg-white/[0.06] prose-code:px-1 prose-code:py-0.5 prose-code:rounded prose-pre:bg-[#0a0f14] prose-pre:border prose-pre:border-white/10">
+          <div class="bg-white/[0.02] border border-white/10 p-6 lg:p-8 rounded-sm">
+            <Content />
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>
