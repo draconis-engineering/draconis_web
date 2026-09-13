@@ -1,10 +1,6 @@
 # Draconis Engineering — Roadmap
 
-Concept: `concept.png` — dark cinematic Chinese dragon, gold linework, HUD, mountains, high tech.
-
-## v1.0 — MVP (current)
-
-**Goal:** Pixel-faithful `index` to concept, fast, deployable to `draconis-engineering.com`.
+## v1.0 — Current
 
 - [x] Stack: Astro 7 + TypeScript strict + React islands + Tailwind 4 + MDX + Lucide + sitemap
 - [x] Config: `site: https://draconis-engineering.com`, `output: static`, `sharp` image service, `public/CNAME`
@@ -16,12 +12,7 @@ Concept: `concept.png` — dark cinematic Chinese dragon, gold linework, HUD, mo
 - [x] Stubs: `/projects` (all 7 inc. Dracolix), `/about`, `/docs`, `/blog` — same header/footer, mono, "in development" pattern — no 404s
 - [x] Deploy: `.github/workflows/deploy.yml` (setup-node 22, `npm ci` → `build` → `upload-pages-artifact` → `deploy-pages`), sitemap-index
 
-**How to go live on `draconis-engineering.com`:**
-1. Buy domain (if not owned)
-2. Repo Settings → Pages → Custom domain: `draconis-engineering.com`, Enforce HTTPS
-3. DNS: `A 185.199.108.153 / 185.199.109.153 / 185.199.110.153 / 185.199.111.153` + `CNAME www → <username>.github.io` (or `CNAME @ → <username>.github.io` if using apex CNAME). Keep `public/CNAME` in repo.
-
-## v1.1 — Luxuries (next)
+## v1.1 — Next
 
 - Volumetric smoke / cloud parallax with `Three.js` (or `motion` + shader) — scroll-linked dragon depth, not just CSS drift
 - Real content collections: `src/content/{docs,blog,projects}.config.ts` + MDX rendering (replace stubs), `content Collections` API
@@ -33,8 +24,3 @@ Concept: `concept.png` — dark cinematic Chinese dragon, gold linework, HUD, mo
 
 - Interactive Draconis SVG / mask morphs, lab journal, auth-gated tools
 - i18n if needed, search (`pagefind`)
-
-## Decisions kept from `sketch.md`
-
-- No framework switch: Astro+React is correct for islands + static Pages. No SSR needed.
-- Tailwind 4 via Vite (no config file). Framer Motion (`motion`) kept for cards only; Three.js deferred to v1.1 per your call.
