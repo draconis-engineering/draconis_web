@@ -24,10 +24,19 @@
 
 - Interactive Draconis SVG / mask morphs, lab journal, auth-gated tools
 - i18n if needed, search (`pagefind`)
+
+- [ ] "Built in Norway" page with flag
 - [ ] Privacy policy page
 - [ ] Get svg logo
-- [ ] Fill robots.txt, llms.txt, sitemap.xml, meta tags,
+- [ ] Fill robots.txt, llms.txt, sitemap.xml, meta tags, etc.
 - [ ] 404 page
 - [ ] Error page
 - [ ] Fill blanks
-- [ ]
+- [ ] Downloads page
+    - [ ] Olympus (Terminal/Analytics Engine) + the training ecosystem
+    - [ ] DracoLIX runtime
+    - [ ] DragonSuite Desktop ?
+    - [ ] DraconiForge CLI
+    - [ ] Draco Aeternus Assets
+    - [ ] DraconisTML parsers/writers
+    - [ ] DuraPy
