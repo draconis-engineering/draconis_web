@@ -1,0 +1,21 @@
+# Draconis Engineering
+
+> Engineering software for a higher standard. Open-source tools for athletes, engineers and thinkers who push the limits — in every direction.
+
+## Site
+- Home: https://draconis-engineering.com/
+- Projects: https://draconis-engineering.com/projects/
+- Docs: https://draconis-engineering.com/docs/
+- Blog: https://draconis-engineering.com/blog/
+- About: https://draconis-engineering.com/about/
+- Privacy: https://draconis-engineering.com/privacy/
+
+## Code
+- GitHub: https://github.com/draconis-engineering
+- Flagship: Olympus — https://github.com/draconis-engineering/olympus
+- Ecosystem: dracoLIX, durapy, draconomicon, draconiforge, draconomics (DragonQuant), draconis_web
+
+## Notes
+- Built in Norway (60.3913° N 5.3221° E — Bergen)
+- Markdown/MDX content in src/content/{docs,blog}
+- Sitemap: https://draconis-engineering.com/sitemap-index.xml

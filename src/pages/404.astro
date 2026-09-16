@@ -1,0 +1,36 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout title="404 — Draconis Engineering" description="Page not found — Draconis Engineering.">
+  <Header />
+  <main class="pt-[88px] bg-[#070a0c] min-h-[70vh] flex flex-col">
+    <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-16 lg:py-24 w-full flex-1">
+      <div class="flex items-center gap-3">
+        <span class="w-8 h-[1px] bg-[#c9a86a]"></span>
+        <span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">404</span>
+        <span class="text-[10px] tracking-[0.16em] font-mono text-white/20">NOT FOUND</span>
+      </div>
+      <div class="mt-6 grid lg:grid-cols-[1.1fr_0.9fr] gap-10 items-start">
+        <div>
+          <h1 class="text-[36px] lg:text-[48px] font-light tracking-[0.08em] text-white leading-[0.95]">LOST<br/><span class="text-white/60">IN THE CLOUDS.</span></h1>
+          <p class="mt-4 max-w-[520px] text-[12.5px] leading-[1.8] font-mono text-white/45">The page you’re looking for doesn’t exist — or the dragon moved it. Head back to the ecosystem.</p>
+          <div class="mt-8 flex flex-wrap gap-3">
+            <a href="/" class="inline-flex items-center gap-2 px-5 py-2.5 bg-[#c9a86a] text-black text-[11px] tracking-[0.16em] font-mono font-medium hover:bg-[#d8bc8a] transition">← HOME</a>
+            <a href="/projects" class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/15 text-white/70 text-[11px] tracking-[0.16em] font-mono hover:border-white/30 hover:text-white transition">PROJECTS</a>
+            <a href="/docs" class="inline-flex items-center gap-2 px-5 py-2.5 border border-white/10 text-white/40 text-[11px] tracking-[0.16em] font-mono hover:text-white/70 transition">DOCS</a>
+          </div>
+          <div class="mt-10 font-mono text-[10px] tracking-[0.14em] text-white/20 border-t border-white/5 pt-4">60.3913° N 5.3221° E · BERGEN, NORWAY · DRACONIS ENGINEERING</div>
+        </div>
+        <div class="hidden lg:block p-6 border border-white/10 bg-white/[0.02] backdrop-blur">
+          <div class="text-[9px] tracking-[0.22em] font-mono text-white/25">HUD · 404</div>
+          <div class="mt-4 h-[1px] bg-white/5"></div>
+          <div class="mt-4 font-mono text-[11px] leading-relaxed text-white/35">Try: <a href="/docs/getting-started" class="text-[#c9a86a] hover:underline">/docs/getting-started</a> · <a href="/blog" class="text-[#c9a86a] hover:underline">/blog</a> · <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:underline">github.com/draconis-engineering</a></div>
+          <div class="mt-6 flex items-center gap-2 text-[28px] font-light text-white/10">龍 <span class="text-[9px] tracking-[0.3em] font-mono">DRACONIS</span></div>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

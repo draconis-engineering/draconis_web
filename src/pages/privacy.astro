@@ -1,0 +1,34 @@
+---
+import BaseLayout from "../layouts/BaseLayout.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+---
+<BaseLayout title="Privacy — Draconis Engineering" description="Privacy policy for draconis-engineering.com. Minimal data, no tracking.">
+  <Header />
+  <main class="pt-[88px] bg-[#070a0c] min-h-[70vh]">
+    <div class="max-w-[1480px] mx-auto px-6 lg:px-8 py-12">
+      <div class="flex items-center gap-3"><span class="w-8 h-[1px] bg-[#c9a86a]"></span><span class="text-[10px] tracking-[0.22em] font-mono text-[#c9a86a]">LEGAL</span></div>
+      <h1 class="mt-4 text-[28px] lg:text-[36px] tracking-[0.08em] font-light text-white">PRIVACY POLICY</h1>
+      <p class="mt-1 text-[10px] tracking-[0.16em] font-mono text-white/30">Last updated: 16 Sept 2026 · Draconis Engineering · Bergen, Norway (60.3913° N 5.3221° E)</p>
+      <div class="mt-8 max-w-[760px] space-y-6 text-[13px] leading-[1.9] text-white/65">
+        <p>We keep it minimal. This site is a static GitHub Pages site — no backend, no user accounts, no newsletter (yet).</p>
+        <h2 class="text-[13px] tracking-[0.16em] font-mono text-white pt-4 border-t border-white/5">What we collect</h2>
+        <ul class="list-disc pl-5 space-y-1 font-mono text-[12px] text-white/55">
+          <li><strong class="text-white/75">No cookies for tracking.</strong> We don’t set analytics cookies. GitHub Pages may log standard web server access logs (IP, user-agent) per GitHub’s infrastructure.</li>
+          <li><strong class="text-white/75">No personal data stored</strong> by us unless you email us or open a GitHub issue.</li>
+          <li><strong class="text-white/75">Fonts:</strong> Google Fonts (Geist, JetBrains Mono) — loaded from fonts.googleapis.com/fonts.gstatic.com. Google may log requests per their policy.</li>
+        </ul>
+        <h2 class="text-[13px] tracking-[0.16em] font-mono text-white pt-4 border-t border-white/5">Your rights (GDPR)</h2>
+        <p class="font-mono text-[12px] text-white/55">You have the right to access, rectify or delete any personal data you’ve shared with us. Contact us via <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:underline">GitHub</a> — we’ll respond promptly.</p>
+        <h2 class="text-[13px] tracking-[0.16em] font-mono text-white pt-4 border-t border-white/5">Contact</h2>
+        <p class="font-mono text-[12px] text-white/55">Draconis Engineering — Open source at <a href="https://github.com/draconis-engineering" target="_blank" rel="noopener" class="text-[#c9a86a] hover:underline">github.com/draconis-engineering</a>. For privacy requests, open an issue or reach via GitHub profile.</p>
+        <div class="pt-6 border-t border-white/5 flex gap-3">
+          <a href="/" class="text-[11px] tracking-[0.16em] font-mono text-[#c9a86a] hover:text-[#e8d5a8]">← HOME</a>
+          <span class="text-white/15">·</span>
+          <a href="/about" class="text-[11px] tracking-[0.16em] font-mono text-white/40 hover:text-white">ABOUT</a>
+        </div>
+      </div>
+    </div>
+  </main>
+  <Footer />
+</BaseLayout>

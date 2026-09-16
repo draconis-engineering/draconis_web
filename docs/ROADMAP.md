@@ -26,11 +26,11 @@
 - i18n if needed, search (`pagefind`)
 
 - [ ] "Built in Norway" page with flag
-- [ ] Privacy policy page
+- [x] Privacy policy page (`src/pages/privacy.astro:1`)
 - [ ] Get svg logo
-- [ ] Fill robots.txt, llms.txt, sitemap.xml, meta tags, etc.
-- [ ] 404 page
-- [ ] Error page
+- [x] Fill robots.txt, llms.txt, sitemap.xml, meta tags, etc. (`public/robots.txt`, `public/llms.txt`, `src/layouts/BaseLayout.astro:13` sitemap via `astro.config.mjs:10`)
+- [x] 404 page (`src/pages/404.astro:1`)
+- [ ] Error page (use 404 as fallback, add 500 if SSR later)
 - [ ] Fill blanks
 - [ ] Downloads page
     - [ ] Olympus (Terminal/Analytics Engine) + the training ecosystem
