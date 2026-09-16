@@ -24,3 +24,10 @@
 
 - Interactive Draconis SVG / mask morphs, lab journal, auth-gated tools
 - i18n if needed, search (`pagefind`)
+- [ ] Privacy policy page
+- [ ] Get svg logo
+- [ ] Fill robots.txt, llms.txt, sitemap.xml, meta tags,
+- [ ] 404 page
+- [ ] Error page
+- [ ] Fill blanks
+- [ ]
